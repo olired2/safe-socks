@@ -334,68 +334,6 @@ export default function SafeSocksLanding() {
               </div>
             </div>
           </div>
-
-          {/* Product Features Comparison */}
-          <div className="bg-gray-50 rounded-3xl p-8" data-animate="fade-up">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Comparación de Características</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="pb-4 text-gray-900 font-semibold">Característica</th>
-                    <th className="pb-4 text-center text-gray-900 font-semibold">Classic</th>
-                    <th className="pb-4 text-center text-gray-900 font-semibold">Premium</th>
-                    <th className="pb-4 text-center text-gray-900 font-semibold">Sport</th>
-                    <th className="pb-4 text-center text-gray-900 font-semibold">Kids</th>
-                    <th className="pb-4 text-center text-gray-900 font-semibold">Medical</th>
-                  </tr>
-                </thead>
-                <tbody className="text-sm">
-                  <tr className="border-b border-gray-100">
-                    <td className="py-3 text-gray-700">Tecnología Antiderrapante</td>
-                    <td className="py-3 text-center">✓</td>
-                    <td className="py-3 text-center">✓✓</td>
-                    <td className="py-3 text-center">✓✓✓</td>
-                    <td className="py-3 text-center">✓✓</td>
-                    <td className="py-3 text-center">✓✓</td>
-                  </tr>
-                  <tr className="border-b border-gray-100">
-                    <td className="py-3 text-gray-700">Absorción de Humedad</td>
-                    <td className="py-3 text-center">-</td>
-                    <td className="py-3 text-center">✓</td>
-                    <td className="py-3 text-center">✓✓✓</td>
-                    <td className="py-3 text-center">✓</td>
-                    <td className="py-3 text-center">✓✓</td>
-                  </tr>
-                  <tr className="border-b border-gray-100">
-                    <td className="py-3 text-gray-700">Propiedades Antibacterianas</td>
-                    <td className="py-3 text-center">-</td>
-                    <td className="py-3 text-center">-</td>
-                    <td className="py-3 text-center">✓</td>
-                    <td className="py-3 text-center">-</td>
-                    <td className="py-3 text-center">✓✓✓</td>
-                  </tr>
-                  <tr className="border-b border-gray-100">
-                    <td className="py-3 text-gray-700">Durabilidad Extra</td>
-                    <td className="py-3 text-center">-</td>
-                    <td className="py-3 text-center">✓✓✓</td>
-                    <td className="py-3 text-center">✓✓</td>
-                    <td className="py-3 text-center">✓</td>
-                    <td className="py-3 text-center">✓✓</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 text-gray-700">Diseños Especiales</td>
-                    <td className="py-3 text-center">-</td>
-                    <td className="py-3 text-center">-</td>
-                    <td className="py-3 text-center">✓</td>
-                    <td className="py-3 text-center">✓✓✓</td>
-                    <td className="py-3 text-center">-</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
           {/* Call to Action */}
           <div className="text-center mt-12" data-animate="fade-up">
             <button
