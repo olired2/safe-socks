@@ -467,7 +467,7 @@ export default function SafeSocksLanding() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 mb-2">Email</h3>
-                    <p className="text-gray-600">manzooliver819@gmail.com</p>
+                    <p className="text-gray-600">ejemplo@gmail.com</p>
                     <p className="text-sm text-gray-500">Respuesta en 24 horas</p>
                   </div>
                 </div>
