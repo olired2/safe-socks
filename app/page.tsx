@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import Image from "next/image"
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import {
   Phone,
   Mail,
@@ -15,23 +15,25 @@ import {
   Award,
   ChevronLeft,
   ChevronRight,
-} from "lucide-react"
+  Menu,
+  X,
+} from "lucide-react";
 
 interface ProductCarouselProps {
-  images: string[]
-  alt: string
+  images: string[];
+  alt: string;
 }
 
 function ProductCarousel({ images, alt }: ProductCarouselProps) {
-  const [currentImage, setCurrentImage] = useState(0)
+  const [currentImage, setCurrentImage] = useState(0);
 
   const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % images.length)
-  }
+    setCurrentImage((prev) => (prev + 1) % images.length);
+  };
 
   const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + images.length) % images.length)
-  }
+    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   return (
     <div className="relative bg-white rounded-2xl p-4 mb-6 group">
@@ -72,7 +74,7 @@ function ProductCarousel({ images, alt }: ProductCarouselProps) {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 // Custom hook for scroll animations
@@ -81,31 +83,32 @@ function useScrollAnimation() {
     const observerOptions = {
       threshold: 0.1,
       rootMargin: "0px 0px -50px 0px",
-    }
+    };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("animate-in")
+          entry.target.classList.add("animate-in");
         }
-      })
-    }, observerOptions)
+      });
+    }, observerOptions);
 
     // Observe all elements with data-animate attribute
-    const animatedElements = document.querySelectorAll("[data-animate]")
-    animatedElements.forEach((el) => observer.observe(el))
+    const animatedElements = document.querySelectorAll("[data-animate]");
+    animatedElements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 }
 
 export default function SafeSocksLanding() {
-  useScrollAnimation()
+  const [menuOpen, setMenuOpen] = useState(false);
+  useScrollAnimation();
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    element?.scrollIntoView({ behavior: "smooth" })
-  }
+    const element = document.getElementById(sectionId);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -120,6 +123,7 @@ export default function SafeSocksLanding() {
               height={60}
               className="h-12 w-auto"
             />
+            {/* Menú escritorio */}
             <div className="hidden md:flex space-x-8">
               <button
                 onClick={() => scrollToSection("hero")}
@@ -146,12 +150,64 @@ export default function SafeSocksLanding() {
                 Contacto
               </button>
             </div>
+            {/* Botón hamburguesa móvil */}
+            <button
+              className="md:hidden text-gray-700 hover:text-red-500 transition-colors"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Abrir menú"
+            >
+              {menuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+            </button>
           </div>
+          {/* Menú móvil */}
+          {menuOpen && (
+            <div className="md:hidden mt-4 flex flex-col space-y-4 bg-white rounded-xl shadow-lg p-6 animate-in fade-in">
+              <button
+                onClick={() => {
+                  scrollToSection("hero");
+                  setMenuOpen(false);
+                }}
+                className="text-gray-700 hover:text-red-500 transition-colors text-left"
+              >
+                Inicio
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("product");
+                  setMenuOpen(false);
+                }}
+                className="text-gray-700 hover:text-red-500 transition-colors text-left"
+              >
+                Producto
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("benefits");
+                  setMenuOpen(false);
+                }}
+                className="text-gray-700 hover:text-red-500 transition-colors text-left"
+              >
+                Beneficios
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("contact");
+                  setMenuOpen(false);
+                }}
+                className="text-gray-700 hover:text-red-500 transition-colors text-left"
+              >
+                Contacto
+              </button>
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="pt-20 min-h-screen flex items-center bg-gradient-to-br from-gray-50 to-white">
+      <section
+        id="hero"
+        className="pt-20 min-h-screen flex items-center bg-gradient-to-br from-gray-50 to-white"
+      >
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div
@@ -163,8 +219,9 @@ export default function SafeSocksLanding() {
                 <span className="text-red-500 block">Seguridad</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Descubre Safe Socks, los calcetines antiderrapantes que revolucionan tu comodidad y seguridad. Diseñados
-                con tecnología avanzada para brindarte la máxima protección en cada paso.
+                Descubre Safe Socks, los calcetines antiderrapantes que
+                revolucionan tu comodidad y seguridad. Diseñados con tecnología
+                avanzada para brindarte la máxima protección en cada paso.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
@@ -197,7 +254,9 @@ export default function SafeSocksLanding() {
               <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-4 shadow-xl">
                 <div className="flex items-center space-x-2">
                   <Shield className="text-red-500 w-6 h-6" />
-                  <span className="font-semibold text-gray-900">100% Seguro</span>
+                  <span className="font-semibold text-gray-900">
+                    100% Seguro
+                  </span>
                 </div>
               </div>
             </div>
@@ -209,10 +268,12 @@ export default function SafeSocksLanding() {
       <section id="product" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-animate="fade-up">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Nuestra Línea de Productos</h2>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              Nuestra Línea de Productos
+            </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Descubre nuestra completa gama de calcetines antiderrapantes Safe Socks, diseñados para diferentes
-              necesidades y estilos de vida.
+              Descubre nuestra completa gama de calcetines antiderrapantes Safe
+              Socks, diseñados para diferentes necesidades y estilos de vida.
             </p>
           </div>
 
@@ -225,19 +286,20 @@ export default function SafeSocksLanding() {
               style={{ transitionDelay: "100ms" }}
             >
               <ProductCarousel
-                images={[
-                  "/ejemplo-p1.jpeg",
-                  "/ejemplo2-p1.jpeg",
-               
-                ]}
+                images={["/ejemplo-p1.jpeg", "/ejemplo2-p1.jpeg"]}
                 alt="Safe Socks Classic"
               />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Safe Socks Classic</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Safe Socks Classic
+              </h3>
               <p className="text-gray-600 mb-4">
-                Nuestro modelo clásico con tecnología antiderrapante básica. Perfecto para uso diario en el hogar.
+                Nuestro modelo clásico con tecnología antiderrapante básica.
+                Perfecto para uso diario en el hogar.
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-red-500 font-bold text-lg">Desde $15</span>
+                <span className="text-red-500 font-bold text-lg">
+                  Desde $15
+                </span>
                 <div className="flex text-yellow-400">{"★".repeat(5)}</div>
               </div>
             </div>
@@ -249,18 +311,20 @@ export default function SafeSocksLanding() {
               style={{ transitionDelay: "200ms" }}
             >
               <ProductCarousel
-                images={[
-       "/ejemplo-p1.jpeg",
-                  "/ejemplo2-p1.jpeg",
-                ]}
+                images={["/ejemplo-p1.jpeg", "/ejemplo2-p1.jpeg"]}
                 alt="Safe Socks Premium"
               />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Safe Socks Premium</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Safe Socks Premium
+              </h3>
               <p className="text-gray-600 mb-4">
-                Versión premium con materiales de alta calidad y mayor durabilidad. Ideal para uso intensivo.
+                Versión premium con materiales de alta calidad y mayor
+                durabilidad. Ideal para uso intensivo.
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-red-500 font-bold text-lg">Desde $25</span>
+                <span className="text-red-500 font-bold text-lg">
+                  Desde $25
+                </span>
                 <div className="flex text-yellow-400">{"★".repeat(5)}</div>
               </div>
             </div>
@@ -272,18 +336,20 @@ export default function SafeSocksLanding() {
               style={{ transitionDelay: "300ms" }}
             >
               <ProductCarousel
-                images={[
-              "/ejemplo-p1.jpeg",
-                  "/ejemplo2-p1.jpeg",
-                ]}
+                images={["/ejemplo-p1.jpeg", "/ejemplo2-p1.jpeg"]}
                 alt="Safe Socks Sport"
               />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Safe Socks Sport</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Safe Socks Sport
+              </h3>
               <p className="text-gray-600 mb-4">
-                Diseñados para actividades deportivas con tecnología de absorción de humedad y máximo agarre.
+                Diseñados para actividades deportivas con tecnología de
+                absorción de humedad y máximo agarre.
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-red-500 font-bold text-lg">Desde $30</span>
+                <span className="text-red-500 font-bold text-lg">
+                  Desde $30
+                </span>
                 <div className="flex text-yellow-400">{"★".repeat(5)}</div>
               </div>
             </div>
@@ -295,18 +361,20 @@ export default function SafeSocksLanding() {
               style={{ transitionDelay: "400ms" }}
             >
               <ProductCarousel
-                images={[
-                "/ejemplo-p1.jpeg",
-                  "/ejemplo2-p1.jpeg",
-                ]}
+                images={["/ejemplo-p1.jpeg", "/ejemplo2-p1.jpeg"]}
                 alt="Safe Socks Kids"
               />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Safe Socks Kids</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Safe Socks Kids
+              </h3>
               <p className="text-gray-600 mb-4">
-                Especialmente diseñados para niños con colores divertidos y máxima seguridad para los más pequeños.
+                Especialmente diseñados para niños con colores divertidos y
+                máxima seguridad para los más pequeños.
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-red-500 font-bold text-lg">Desde $12</span>
+                <span className="text-red-500 font-bold text-lg">
+                  Desde $12
+                </span>
                 <div className="flex text-yellow-400">{"★".repeat(5)}</div>
               </div>
             </div>
@@ -318,18 +386,20 @@ export default function SafeSocksLanding() {
               style={{ transitionDelay: "500ms" }}
             >
               <ProductCarousel
-                images={[
-                      "/ejemplo-p1.jpeg",
-                  "/ejemplo2-p1.jpeg",
-                ]}
+                images={["/ejemplo-p1.jpeg", "/ejemplo2-p1.jpeg"]}
                 alt="Safe Socks Medical"
               />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Safe Socks Medical</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Safe Socks Medical
+              </h3>
               <p className="text-gray-600 mb-4">
-                Desarrollados para hospitales y centros médicos con propiedades antibacterianas y máxima higiene.
+                Desarrollados para hospitales y centros médicos con propiedades
+                antibacterianas y máxima higiene.
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-red-500 font-bold text-lg">Desde $35</span>
+                <span className="text-red-500 font-bold text-lg">
+                  Desde $35
+                </span>
                 <div className="flex text-yellow-400">{"★".repeat(5)}</div>
               </div>
             </div>
@@ -350,10 +420,12 @@ export default function SafeSocksLanding() {
       <section id="benefits" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-animate="fade-up">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">¿Por qué elegir Safe Socks?</h2>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              ¿Por qué elegir Safe Socks?
+            </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Descubre todos los beneficios que hacen de Safe Socks la mejor opción para tu seguridad y comodidad
-              diaria.
+              Descubre todos los beneficios que hacen de Safe Socks la mejor
+              opción para tu seguridad y comodidad diaria.
             </p>
           </div>
 
@@ -366,9 +438,12 @@ export default function SafeSocksLanding() {
               <div className="bg-red-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
                 <Shield className="text-red-500 w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Máxima Seguridad</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Máxima Seguridad
+              </h3>
               <p className="text-gray-600">
-                Tecnología antiderrapante que previene caídas y resbalones en cualquier superficie.
+                Tecnología antiderrapante que previene caídas y resbalones en
+                cualquier superficie.
               </p>
             </div>
 
@@ -380,9 +455,12 @@ export default function SafeSocksLanding() {
               <div className="bg-red-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
                 <Star className="text-red-500 w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Calidad Premium</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Calidad Premium
+              </h3>
               <p className="text-gray-600">
-                Materiales de primera calidad que garantizan durabilidad y confort excepcional.
+                Materiales de primera calidad que garantizan durabilidad y
+                confort excepcional.
               </p>
             </div>
 
@@ -394,9 +472,12 @@ export default function SafeSocksLanding() {
               <div className="bg-red-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
                 <Users className="text-red-500 w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Para Toda la Familia</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Para Toda la Familia
+              </h3>
               <p className="text-gray-600">
-                Disponible en todas las tallas, perfecto para niños, adultos y adultos mayores.
+                Disponible en todas las tallas, perfecto para niños, adultos y
+                adultos mayores.
               </p>
             </div>
 
@@ -408,26 +489,44 @@ export default function SafeSocksLanding() {
               <div className="bg-red-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
                 <Award className="text-red-500 w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Garantía Total</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Garantía Total
+              </h3>
               <p className="text-gray-600">
-                Respaldamos la calidad de nuestros productos con garantía de satisfacción.
+                Respaldamos la calidad de nuestros productos con garantía de
+                satisfacción.
               </p>
             </div>
           </div>
 
           {/* Stats Section */}
-          <div className="mt-20 grid md:grid-cols-3 gap-8" data-animate="fade-up">
+          <div
+            className="mt-20 grid md:grid-cols-3 gap-8"
+            data-animate="fade-up"
+          >
             <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-bold text-red-500 mb-2">10,000+</div>
-              <div className="text-gray-600 font-semibold">Clientes Satisfechos</div>
+              <div className="text-4xl lg:text-5xl font-bold text-red-500 mb-2">
+                10,000+
+              </div>
+              <div className="text-gray-600 font-semibold">
+                Clientes Satisfechos
+              </div>
             </div>
             <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-bold text-red-500 mb-2">99%</div>
-              <div className="text-gray-600 font-semibold">Efectividad Antiderrapante</div>
+              <div className="text-4xl lg:text-5xl font-bold text-red-500 mb-2">
+                99%
+              </div>
+              <div className="text-gray-600 font-semibold">
+                Efectividad Antiderrapante
+              </div>
             </div>
             <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-bold text-red-500 mb-2">5★</div>
-              <div className="text-gray-600 font-semibold">Calificación Promedio</div>
+              <div className="text-4xl lg:text-5xl font-bold text-red-500 mb-2">
+                5★
+              </div>
+              <div className="text-gray-600 font-semibold">
+                Calificación Promedio
+              </div>
             </div>
           </div>
         </div>
@@ -437,10 +536,12 @@ export default function SafeSocksLanding() {
       <section id="contact" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-animate="fade-up">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Contáctanos</h2>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              Contáctanos
+            </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              ¿Tienes preguntas sobre Safe Socks? Estamos aquí para ayudarte. Contáctanos a través de cualquiera de
-              nuestros canales.
+              ¿Tienes preguntas sobre Safe Socks? Estamos aquí para ayudarte.
+              Contáctanos a través de cualquiera de nuestros canales.
             </p>
           </div>
 
@@ -455,9 +556,13 @@ export default function SafeSocksLanding() {
                     <Phone className="text-red-500 w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Teléfono</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      Teléfono
+                    </h3>
                     <p className="text-gray-600">+1 (555) 123-4567</p>
-                    <p className="text-sm text-gray-500">Lunes a Viernes, 9:00 AM - 6:00 PM</p>
+                    <p className="text-sm text-gray-500">
+                      Lunes a Viernes, 9:00 AM - 6:00 PM
+                    </p>
                   </div>
                 </div>
 
@@ -466,9 +571,13 @@ export default function SafeSocksLanding() {
                     <Mail className="text-red-500 w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Email</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      Email
+                    </h3>
                     <p className="text-gray-600">ejemplo@gmail.com</p>
-                    <p className="text-sm text-gray-500">Respuesta en 24 horas</p>
+                    <p className="text-sm text-gray-500">
+                      Respuesta en 24 horas
+                    </p>
                   </div>
                 </div>
 
@@ -477,7 +586,9 @@ export default function SafeSocksLanding() {
                     <MapPin className="text-red-500 w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Dirección</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      Dirección
+                    </h3>
                     <p className="text-gray-600">
                       123 Innovation Street
                       <br />
@@ -489,10 +600,12 @@ export default function SafeSocksLanding() {
 
               {/* Social Media */}
               <div className="mt-12">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">Síguenos en Redes Sociales</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-6">
+                  Síguenos en Redes Sociales
+                </h3>
                 <div className="flex space-x-4">
                   <a
-                    href="#"
+                    href="https://www.instagram.com/safe_socks_/?hl=es"
                     className="bg-red-500 text-white w-12 h-12 rounded-xl flex items-center justify-center hover:bg-red-600 transition-colors"
                   >
                     <Facebook className="w-6 h-6" />
@@ -522,7 +635,12 @@ export default function SafeSocksLanding() {
               rel="noopener noreferrer"
               className="flex items-center space-x-2 bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600 transition-colors"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.571-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.205 5.077 4.372.711.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413-.074-.124-.272-.198-.57-.347z" />
               </svg>
               <span>Contactar por WhatsApp</span>
@@ -545,12 +663,16 @@ export default function SafeSocksLanding() {
               />
             </div>
             <div className="text-center md:text-right">
-              <p className="text-gray-400">© 2024 Safe Socks. Todos los derechos reservados.</p>
-              <p className="text-gray-400 text-sm mt-2">Diseñado con ❤️ para tu seguridad y comodidad</p>
+              <p className="text-gray-400">
+                © 2024 Safe Socks. Todos los derechos reservados.
+              </p>
+              <p className="text-gray-400 text-sm mt-2">
+                Diseñado con ❤️ para tu seguridad y comodidad
+              </p>
             </div>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
