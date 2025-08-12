@@ -44,21 +44,25 @@ function ProductCarousel({ media }: ProductCarouselProps) {
 
   return (
     <div className="relative bg-white rounded-2xl p-4 mb-6 group">
-      <div className="relative overflow-hidden rounded-xl">
+      <div
+        className="relative overflow-hidden rounded-xl"
+        style={{ aspectRatio: currentMedia.type === "image" ? "auto" : "16/9" }}
+      >
         {currentMedia.type === "image" ? (
           <Image
             src={currentMedia.src}
             alt={currentMedia.alt || `Imagen ${currentIndex + 1}`}
-            width={200}
-            height={200}
-            className="w-full h-48 object-cover transition-transform duration-300"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-auto h-auto max-w-full max-h-full object-contain"
           />
         ) : (
           <video
             src={currentMedia.src}
             controls
             autoPlay
-            className="w-full h-48 object-cover rounded-xl"
+            className="w-auto h-auto max-w-full max-h-full object-contain rounded-xl"
           />
         )}
 
@@ -482,7 +486,7 @@ export default function SafeSocksLanding() {
 
           {/* Sección de estadisticas */}
           <div
-            className="mt-20 grid md:grid-cols-3 gap-8"
+            className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8"
             data-animate="fade-up"
           >
             <div className="text-center">
