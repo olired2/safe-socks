@@ -229,7 +229,7 @@ export default function SafeSocksLanding() {
                 con maquinaria propia, haciendo el calcetín desde cero, desde el
                 tejido del calcetín hasta la fabricación de la tinta y el
                 pintado de la misma. El precio puede ser negociable según el
-                volumen de compra, precio especial a parques de trampolines,
+                volumen de compra, precio especial a parques de trampolines.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
