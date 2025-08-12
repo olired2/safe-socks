@@ -46,7 +46,7 @@ function ProductCarousel({ images, alt }: ProductCarouselProps) {
           className="w-full h-48 object-cover transition-transform duration-300"
         />
 
-        {/* Navigation Arrows */}
+        {/* Flechas de Navegación */}
         <button
           onClick={prevImage}
           className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg"
@@ -61,7 +61,7 @@ function ProductCarousel({ images, alt }: ProductCarouselProps) {
         </button>
       </div>
 
-      {/* Dots Indicator */}
+      {/* Indicador de puntos */}
       <div className="flex justify-center space-x-2 mt-3">
         {images.map((_, index) => (
           <button
@@ -77,7 +77,7 @@ function ProductCarousel({ images, alt }: ProductCarouselProps) {
   );
 }
 
-// Custom hook for scroll animations
+// Gancho personalizado para la animacion de desplazamiento
 function useScrollAnimation() {
   useEffect(() => {
     const observerOptions = {
@@ -93,7 +93,7 @@ function useScrollAnimation() {
       });
     }, observerOptions);
 
-    // Observe all elements with data-animate attribute
+    // Se observan todos los elementos con el atributo data-animate
     const animatedElements = document.querySelectorAll("[data-animate]");
     animatedElements.forEach((el) => observer.observe(el));
 
@@ -112,7 +112,7 @@ export default function SafeSocksLanding() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
+      {/* Navegación */}
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
@@ -150,13 +150,17 @@ export default function SafeSocksLanding() {
                 Contacto
               </button>
             </div>
-            {/* Botón hamburguesa móvil */}
+            {/* Botón hamburguesa para móvil */}
             <button
               className="md:hidden text-gray-700 hover:text-red-500 transition-colors"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Abrir menú"
             >
-              {menuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+              {menuOpen ? (
+                <X className="w-8 h-8" />
+              ) : (
+                <Menu className="w-8 h-8" />
+              )}
             </button>
           </div>
           {/* Menú móvil */}
@@ -203,7 +207,7 @@ export default function SafeSocksLanding() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* seccion de descripción */}
       <section
         id="hero"
         className="pt-20 min-h-screen flex items-center bg-gradient-to-br from-gray-50 to-white"
@@ -215,13 +219,19 @@ export default function SafeSocksLanding() {
               className="opacity-0 translate-x-[-50px] transition-all duration-1000 ease-out"
             >
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-                Camina con
-                <span className="text-red-500 block">Seguridad</span>
+                Camina Seguro
+                <span className="text-red-500 block">con safesocks.</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Descubre Safe Socks, los calcetines antiderrapantes que
-                revolucionan tu comodidad y seguridad. Diseñados con tecnología
-                avanzada para brindarte la máxima protección en cada paso.
+                Safe socks, es una marca de calcetín Super Antiderrapante que
+                posee una tinta exclusiva (antislipink) y única en su segmento.
+                Nuestra tinta es capaz de adherirse en el azulejo que esta
+                adentro de una alberca pudiendo practicar aquaaerobics si así se
+                requiere, evitando caídas letales en los consumidores. Se cuenta
+                con maquinaria propia, haciendo el calcetín desde cero, desde el
+                tejido del calcetín hasta la fabricación de la tinta y el
+                pintado de la misma. El precio puede ser negociable según el
+                volumen de compra, precio especial a parques de trampolines,
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
@@ -264,7 +274,7 @@ export default function SafeSocksLanding() {
         </div>
       </section>
 
-      {/* Product Section */}
+      {/* Sección de Productos */}
       <section id="product" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-animate="fade-up">
@@ -277,9 +287,9 @@ export default function SafeSocksLanding() {
             </p>
           </div>
 
-          {/* Products Grid */}
+          {/* Grid de Productos  */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {/* Product 1 - Classic */}
+            {/* Producto 1 - Classic */}
             <div
               data-animate="fade-up"
               className="opacity-0 translate-y-[50px] transition-all duration-1000 ease-out bg-gray-50 rounded-3xl p-6 hover:shadow-xl hover:shadow-red-100 transition-shadow"
@@ -304,7 +314,7 @@ export default function SafeSocksLanding() {
               </div>
             </div>
 
-            {/* Product 2 - Premium */}
+            {/* Producto 2 - Premium */}
             <div
               data-animate="fade-up"
               className="opacity-0 translate-y-[50px] transition-all duration-1000 ease-out bg-gray-50 rounded-3xl p-6 hover:shadow-xl hover:shadow-red-100 transition-shadow"
@@ -329,7 +339,7 @@ export default function SafeSocksLanding() {
               </div>
             </div>
 
-            {/* Product 3 - Sport */}
+            {/* Producto 3 - Sport */}
             <div
               data-animate="fade-up"
               className="opacity-0 translate-y-[50px] transition-all duration-1000 ease-out bg-gray-50 rounded-3xl p-6 hover:shadow-xl hover:shadow-red-100 transition-shadow"
@@ -354,7 +364,7 @@ export default function SafeSocksLanding() {
               </div>
             </div>
 
-            {/* Product 4 - Kids */}
+            {/* Producto 4 - Kids */}
             <div
               data-animate="fade-up"
               className="opacity-0 translate-y-[50px] transition-all duration-1000 ease-out bg-gray-50 rounded-3xl p-6 hover:shadow-xl hover:shadow-red-100 transition-shadow"
@@ -379,7 +389,7 @@ export default function SafeSocksLanding() {
               </div>
             </div>
 
-            {/* Product 5 - Medical */}
+            {/* Producto 5 - Medical */}
             <div
               data-animate="fade-up"
               className="opacity-0 translate-y-[50px] transition-all duration-1000 ease-out bg-gray-50 rounded-3xl p-6 hover:shadow-xl hover:shadow-red-100 transition-shadow md:col-span-2 lg:col-span-1"
@@ -404,7 +414,7 @@ export default function SafeSocksLanding() {
               </div>
             </div>
           </div>
-          {/* Call to Action */}
+          {/* Llamado a la acción */}
           <div className="text-center mt-12" data-animate="fade-up">
             <button
               onClick={() => scrollToSection("contact")}
@@ -416,7 +426,7 @@ export default function SafeSocksLanding() {
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* Sección de beneficios */}
       <section id="benefits" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-animate="fade-up">
@@ -499,7 +509,7 @@ export default function SafeSocksLanding() {
             </div>
           </div>
 
-          {/* Stats Section */}
+          {/* Sección de estadisticas */}
           <div
             className="mt-20 grid md:grid-cols-3 gap-8"
             data-animate="fade-up"
@@ -532,7 +542,7 @@ export default function SafeSocksLanding() {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Sección de contacto */}
       <section id="contact" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-animate="fade-up">
@@ -561,7 +571,7 @@ export default function SafeSocksLanding() {
                     </h3>
                     <p className="text-gray-600">+1 (555) 123-4567</p>
                     <p className="text-sm text-gray-500">
-                      Lunes a Viernes, 9:00 AM - 6:00 PM
+                      Lunes a Viernes de 8 a 7 corrido y Sábados de 8:00 am a 2:00 pm
                     </p>
                   </div>
                 </div>
@@ -590,9 +600,9 @@ export default function SafeSocksLanding() {
                       Dirección
                     </h3>
                     <p className="text-gray-600">
-                      123 Innovation Street
+                      Av. Insurgentes No:868 col. Camino real
                       <br />
-                      Tech City, TC 12345
+                      Colima, Colima México 
                     </p>
                   </div>
                 </div>
@@ -605,7 +615,7 @@ export default function SafeSocksLanding() {
                 </h3>
                 <div className="flex space-x-4">
                   <a
-                    href="https://www.instagram.com/safe_socks_/?hl=es"
+                    href="#"
                     className="bg-red-500 text-white w-12 h-12 rounded-xl flex items-center justify-center hover:bg-red-600 transition-colors"
                   >
                     <Facebook className="w-6 h-6" />
@@ -617,7 +627,7 @@ export default function SafeSocksLanding() {
                     <Instagram className="w-6 h-6" />
                   </a>
                   <a
-                    href="#"
+                    href="https://www.instagram.com/safe_socks_/?hl=es"
                     className="bg-red-500 text-white w-12 h-12 rounded-xl flex items-center justify-center hover:bg-red-600 transition-colors"
                   >
                     <Twitter className="w-6 h-6" />
@@ -627,10 +637,10 @@ export default function SafeSocksLanding() {
             </div>
           </div>
 
-          {/* WhatsApp Contact Button */}
+          {/* WhatsApp boton de contacto */}
           <div className="mt-8 text-center" data-animate="fade-up">
             <a
-              href="https://wa.me/523121001096?text=Hola,%20quiero%20más%20información%20sobre%20Safe%20Socks"
+              href="https://wa.me/523121838468?text=Hola,%20quiero%20más%20información%20sobre%20Safe%20Socks"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-2 bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600 transition-colors"
@@ -647,6 +657,26 @@ export default function SafeSocksLanding() {
             </a>
           </div>
         </div>
+        {/* WhatsApp boton de contacto2 */}
+          <div className="mt-8 text-center" data-animate="fade-up">
+            <a
+              href="https://wa.me/523123189249 ?text=Hola,%20quiero%20más%20información%20sobre%20Safe%20Socks"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-2 bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600 transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.571-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.205 5.077 4.372.711.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413-.074-.124-.272-.198-.57-.347z" />
+              </svg>
+              <span>Contactar por WhatsApp</span>
+            </a>
+          </div>
+        
       </section>
 
       {/* Footer */}
