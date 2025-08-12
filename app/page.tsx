@@ -670,5 +670,25 @@ export default function SafeSocksLanding() {
   );
 }
 function useScrollAnimation() {
-  throw new Error("Function not implemented.");
+  useEffect(() => {
+    const elements = document.querySelectorAll("[data-animate]");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const element = entry.target;
+            element.classList.add("animate-in");
+            element.classList.remove("opacity-0", "translate-x-[-50px]", "translate-x-[50px]", "translate-y-[50px]");
+            observer.unobserve(element);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
 }
