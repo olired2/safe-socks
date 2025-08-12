@@ -322,6 +322,7 @@ export default function SafeSocksLanding() {
                 media={[
                   { type: "image", src: "/ejemplo-p1.jpeg", alt: "Safe Socks Classic 1" },
                   { type: "image", src: "/ejemplo2-p1.jpeg", alt: "Safe Socks Classic 2" },
+               { type: "video", src: "/casual.mp4", alt: "Safe Socks Padel Video" },
                 ]}
               />
               <h3 className="text-xl font-bold text-gray-900 mb-3">
@@ -346,7 +347,7 @@ export default function SafeSocksLanding() {
               <ProductCarousel
                 media={[
                   { type: "image", src: "/ejemplo-p1.jpeg", alt: "Safe Socks Classic 3" },
-                  { type: "video", src: "/padel.mp4", alt: "Safe Socks Padel Video" },
+                  { type: "video", src: "/casual.mp4", alt: "Safe Socks Padel Video" },
                 ]}
               />
               <h3 className="text-xl font-bold text-gray-900 mb-3">
