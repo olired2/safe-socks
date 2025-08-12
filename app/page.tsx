@@ -372,7 +372,7 @@ export default function SafeSocksLanding() {
               <ProductCarousel
                 media={[
                   { type: "image", src: "/padel.jpeg", alt: "Safe Socks Training Padel" },
-                  { type: "video", src: "/padel.mp4", alt: "Safe Socks Training Video" },
+                  { type: "video", src: "/casual.mp4", alt: "Safe Socks Training Video" },
                 ]}
               />
               <h3 className="text-xl font-bold text-gray-900 mb-3">
@@ -383,9 +383,6 @@ export default function SafeSocksLanding() {
                 y control de humedad para un rendimiento óptimo en la pista.
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-red-500 font-bold text-lg">
-                  Desde $12
-                </span>
                 <div className="flex text-yellow-400">{"★".repeat(5)}</div>
               </div>
             </div>
