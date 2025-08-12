@@ -19,42 +19,60 @@ import {
   X,
 } from "lucide-react";
 
-interface ProductCarouselProps {
-  images: string[];
-  alt: string;
+interface MediaItem {
+  type: "image" | "video";
+  src: string;
+  alt?: string;
 }
 
-function ProductCarousel({ images, alt }: ProductCarouselProps) {
-  const [currentImage, setCurrentImage] = useState(0);
+interface ProductCarouselProps {
+  media: MediaItem[];
+}
 
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % images.length);
+function ProductCarousel({ media }: ProductCarouselProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextMedia = () => {
+    setCurrentIndex((prev) => (prev + 1) % media.length);
   };
 
-  const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+  const prevMedia = () => {
+    setCurrentIndex((prev) => (prev - 1 + media.length) % media.length);
   };
+
+  const currentMedia = media[currentIndex];
 
   return (
     <div className="relative bg-white rounded-2xl p-4 mb-6 group">
       <div className="relative overflow-hidden rounded-xl">
-        <Image
-          src={images[currentImage] || "/placeholder.svg"}
-          alt={`${alt} - Imagen ${currentImage + 1}`}
-          width={200}
-          height={200}
-          className="w-full h-48 object-cover transition-transform duration-300"
-        />
+        {currentMedia.type === "image" ? (
+          <Image
+            src={currentMedia.src}
+            alt={currentMedia.alt || `Imagen ${currentIndex + 1}`}
+            width={200}
+            height={200}
+            className="w-full h-48 object-cover transition-transform duration-300"
+          />
+        ) : (
+          <video
+            src={currentMedia.src}
+            controls
+            autoPlay
+            className="w-full h-48 object-cover rounded-xl"
+          />
+        )}
 
         {/* Flechas de Navegación */}
         <button
-          onClick={prevImage}
+          onClick={prevMedia}
+          aria-label="Anterior"
           className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
         <button
-          onClick={nextImage}
+          onClick={nextMedia}
+          aria-label="Siguiente"
           className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg"
         >
           <ChevronRight className="w-4 h-4" />
@@ -63,44 +81,20 @@ function ProductCarousel({ images, alt }: ProductCarouselProps) {
 
       {/* Indicador de puntos */}
       <div className="flex justify-center space-x-2 mt-3">
-        {images.map((_, index) => (
+        {media.map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentImage(index)}
+            onClick={() => setCurrentIndex(index)}
             className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-              index === currentImage ? "bg-red-500" : "bg-gray-300"
+              index === currentIndex ? "bg-red-500" : "bg-gray-300"
             }`}
+            aria-label={`Ir al ${index + 1} media`}
           />
         ))}
       </div>
     </div>
   );
 }
-
-// Gancho personalizado para la animacion de desplazamiento
-function useScrollAnimation() {
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("animate-in");
-        }
-      });
-    }, observerOptions);
-
-    // Se observan todos los elementos con el atributo data-animate
-    const animatedElements = document.querySelectorAll("[data-animate]");
-    animatedElements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-}
-
 export default function SafeSocksLanding() {
   const [menuOpen, setMenuOpen] = useState(false);
   useScrollAnimation();
@@ -289,90 +283,18 @@ export default function SafeSocksLanding() {
 
           {/* Grid de Productos  */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {/* Producto 1 - Classic */}
+            {/* Producto 1 - kids */}
             <div
               data-animate="fade-up"
               className="opacity-0 translate-y-[50px] transition-all duration-1000 ease-out bg-gray-50 rounded-3xl p-6 hover:shadow-xl hover:shadow-red-100 transition-shadow"
               style={{ transitionDelay: "100ms" }}
             >
               <ProductCarousel
-                images={["/ejemplo-p1.jpeg", "/ejemplo2-p1.jpeg"]}
-                alt="Safe Socks Classic"
-              />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Safe Socks Classic
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Nuestro modelo clásico con tecnología antiderrapante básica.
-                Perfecto para uso diario en el hogar.
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="text-red-500 font-bold text-lg">
-                  Desde $15
-                </span>
-                <div className="flex text-yellow-400">{"★".repeat(5)}</div>
-              </div>
-            </div>
-
-            {/* Producto 2 - Premium */}
-            <div
-              data-animate="fade-up"
-              className="opacity-0 translate-y-[50px] transition-all duration-1000 ease-out bg-gray-50 rounded-3xl p-6 hover:shadow-xl hover:shadow-red-100 transition-shadow"
-              style={{ transitionDelay: "200ms" }}
-            >
-              <ProductCarousel
-                images={["/ejemplo-p1.jpeg", "/ejemplo2-p1.jpeg"]}
-                alt="Safe Socks Premium"
-              />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Safe Socks Premium
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Versión premium con materiales de alta calidad y mayor
-                durabilidad. Ideal para uso intensivo.
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="text-red-500 font-bold text-lg">
-                  Desde $25
-                </span>
-                <div className="flex text-yellow-400">{"★".repeat(5)}</div>
-              </div>
-            </div>
-
-            {/* Producto 3 - Sport */}
-            <div
-              data-animate="fade-up"
-              className="opacity-0 translate-y-[50px] transition-all duration-1000 ease-out bg-gray-50 rounded-3xl p-6 hover:shadow-xl hover:shadow-red-100 transition-shadow"
-              style={{ transitionDelay: "300ms" }}
-            >
-              <ProductCarousel
-                images={["/ejemplo-p1.jpeg", "/ejemplo2-p1.jpeg"]}
-                alt="Safe Socks Sport"
-              />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Safe Socks Sport
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Diseñados para actividades deportivas con tecnología de
-                absorción de humedad y máximo agarre.
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="text-red-500 font-bold text-lg">
-                  Desde $30
-                </span>
-                <div className="flex text-yellow-400">{"★".repeat(5)}</div>
-              </div>
-            </div>
-
-            {/* Producto 4 - Kids */}
-            <div
-              data-animate="fade-up"
-              className="opacity-0 translate-y-[50px] transition-all duration-1000 ease-out bg-gray-50 rounded-3xl p-6 hover:shadow-xl hover:shadow-red-100 transition-shadow"
-              style={{ transitionDelay: "400ms" }}
-            >
-              <ProductCarousel
-                images={["/ejemplo-p1.jpeg", "/ejemplo2-p1.jpeg"]}
-                alt="Safe Socks Kids"
+                media={[
+                  { type: "image", src: "/ejemplo-p1.jpeg", alt: "Safe Socks Classic 1" },
+                  { type: "image", src: "/ejemplo2-p1.jpeg", alt: "Safe Socks Classic 2" },
+                  { type: "video", src: "/Kids.mp4", alt: "Safe Socks Classic Video" },
+                ]}
               />
               <h3 className="text-xl font-bold text-gray-900 mb-3">
                 Safe Socks Kids
@@ -382,33 +304,82 @@ export default function SafeSocksLanding() {
                 máxima seguridad para los más pequeños.
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-red-500 font-bold text-lg">
-                  Desde $12
-                </span>
                 <div className="flex text-yellow-400">{"★".repeat(5)}</div>
               </div>
             </div>
 
-            {/* Producto 5 - Medical */}
+            {/* Producto 2 - Diabetics */}
             <div
               data-animate="fade-up"
-              className="opacity-0 translate-y-[50px] transition-all duration-1000 ease-out bg-gray-50 rounded-3xl p-6 hover:shadow-xl hover:shadow-red-100 transition-shadow md:col-span-2 lg:col-span-1"
-              style={{ transitionDelay: "500ms" }}
+              className="opacity-0 translate-y-[50px] transition-all duration-1000 ease-out bg-gray-50 rounded-3xl p-6 hover:shadow-xl hover:shadow-red-100 transition-shadow"
+              style={{ transitionDelay: "200ms" }}
             >
               <ProductCarousel
-                images={["/ejemplo-p1.jpeg", "/ejemplo2-p1.jpeg"]}
-                alt="Safe Socks Medical"
+                media={[
+                  { type: "image", src: "/ejemplo-p1.jpeg", alt: "Safe Socks Classic 1" },
+                  { type: "image", src: "/ejemplo2-p1.jpeg", alt: "Safe Socks Classic 2" },
+                ]}
               />
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Safe Socks Medical
+                Safe Socks Diabetics
               </h3>
               <p className="text-gray-600 mb-4">
-                Desarrollados para hospitales y centros médicos con propiedades
-                antibacterianas y máxima higiene.
+                Diseñados para ofrecer comodidad duradera, reduciendo la
+                fricción y cuidando cada paso de quienes necesitan atención
+                especial en sus pies.
+              </p>
+              <div className="flex items-center justify-between">
+                <div className="flex text-yellow-400">{"★".repeat(5)}</div>
+              </div>
+            </div>
+
+            {/* Producto 3 - Casual */}
+            <div
+              data-animate="fade-up"
+              className="opacity-0 translate-y-[50px] transition-all duration-1000 ease-out bg-gray-50 rounded-3xl p-6 hover:shadow-xl hover:shadow-red-100 transition-shadow"
+              style={{ transitionDelay: "300ms" }}
+            >
+              <ProductCarousel
+                media={[
+                  { type: "image", src: "/ejemplo-p1.jpeg", alt: "Safe Socks Classic 3" },
+                  { type: "video", src: "/padel.mp4", alt: "Safe Socks Padel Video" },
+                ]}
+              />
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Safe Socks Casual
+              </h3>
+              <p className="text-gray-600 mb-4">
+                Diseñados para el día a día, combinando comodidad,
+                transpirabilidad y un ajuste seguro que te acompaña en cada
+                paso.
+              </p>
+              <div className="flex items-center justify-between">
+                <div className="flex text-yellow-400">{"★".repeat(5)}</div>
+              </div>
+            </div>
+
+            {/* Producto 4 -  */}
+            <div
+              data-animate="fade-up"
+              className="opacity-0 translate-y-[50px] transition-all duration-1000 ease-out bg-gray-50 rounded-3xl p-6 hover:shadow-xl hover:shadow-red-100 transition-shadow"
+              style={{ transitionDelay: "400ms" }}
+            >
+              <ProductCarousel
+                media={[
+                  { type: "image", src: "/padel.jpeg", alt: "Safe Socks Training Padel" },
+                  { type: "video", src: "/padel.mp4", alt: "Safe Socks Training Video" },
+                ]}
+              />
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Safe Socks Training padel
+              </h3>
+              <p className="text-gray-600 mb-4">
+                Calcetines deportivos que combinan amortiguación, ajuste seguro
+                y control de humedad para un rendimiento óptimo en la pista.
               </p>
               <div className="flex items-center justify-between">
                 <span className="text-red-500 font-bold text-lg">
-                  Desde $35
+                  Desde $12
                 </span>
                 <div className="flex text-yellow-400">{"★".repeat(5)}</div>
               </div>
@@ -514,14 +485,6 @@ export default function SafeSocksLanding() {
             className="mt-20 grid md:grid-cols-3 gap-8"
             data-animate="fade-up"
           >
-            <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-bold text-red-500 mb-2">
-                10,000+
-              </div>
-              <div className="text-gray-600 font-semibold">
-                Clientes Satisfechos
-              </div>
-            </div>
             <div className="text-center">
               <div className="text-4xl lg:text-5xl font-bold text-red-500 mb-2">
                 99%
@@ -705,4 +668,7 @@ export default function SafeSocksLanding() {
       </footer>
     </div>
   );
+}
+function useScrollAnimation() {
+  throw new Error("Function not implemented.");
 }
