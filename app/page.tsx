@@ -569,9 +569,11 @@ export default function SafeSocksLanding() {
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
                       Teléfono
                     </h3>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
+                    <p className="text-gray-600">+52 (312) 1838468</p>
+                    <p className="text-gray-600">+52 (312) 318 9249</p>
                     <p className="text-sm text-gray-500">
-                      Lunes a Viernes de 8 a 7 corrido y Sábados de 8:00 am a 2:00 pm
+                      Lunes a Viernes de 8 a 7 corrido y Sábados de 8:00 am a
+                      2:00 pm
                     </p>
                   </div>
                 </div>
@@ -584,7 +586,7 @@ export default function SafeSocksLanding() {
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
                       Email
                     </h3>
-                    <p className="text-gray-600">ejemplo@gmail.com</p>
+                    <p className="text-gray-600">Safesocks.mx@gmail.com</p>
                     <p className="text-sm text-gray-500">
                       Respuesta en 24 horas
                     </p>
@@ -600,16 +602,15 @@ export default function SafeSocksLanding() {
                       Dirección
                     </h3>
                     <p className="text-gray-600">
-                      Av. Insurgentes No:868 col. Camino real
+                      Av. Insurgentes No.868 col. Camino real
                       <br />
-                      Colima, Colima México 
+                      Colima, Colima México
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Social Media */}
-              <div className="mt-12">
+              {/*} <div className="mt-12">
                 <h3 className="text-xl font-bold text-gray-900 mb-6">
                   Síguenos en Redes Sociales
                 </h3>
@@ -633,17 +634,20 @@ export default function SafeSocksLanding() {
                     <Twitter className="w-6 h-6" />
                   </a>
                 </div>
-              </div>
+              </div>*/}
             </div>
           </div>
 
           {/* WhatsApp boton de contacto */}
-          <div className="mt-8 text-center" data-animate="fade-up">
+          <div
+            className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4"
+            data-animate="fade-up"
+          >
             <a
               href="https://wa.me/523121838468?text=Hola,%20quiero%20más%20información%20sobre%20Safe%20Socks"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600 transition-colors"
+              className="inline-flex items-center space-x-2 bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600 transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -653,30 +657,26 @@ export default function SafeSocksLanding() {
               >
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.571-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.205 5.077 4.372.711.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413-.074-.124-.272-.198-.57-.347z" />
               </svg>
-              <span>Contactar por WhatsApp</span>
+              <span>WhatsApp 1</span>
+            </a>
+            <a
+              href="https://wa.me/523123189249?text=Hola,%20quiero%20más%20información%20sobre%20Safe%20Socks"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600 transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.571-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.205 5.077 4.372.711.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413-.074-.124-.272-.198-.57-.347z" />
+              </svg>
+              <span>WhatsApp 2</span>
             </a>
           </div>
         </div>
-        {/* WhatsApp boton de contacto2 */}
-          <div className="mt-8 text-center" data-animate="fade-up">
-            <a
-              href="https://wa.me/523123189249 ?text=Hola,%20quiero%20más%20información%20sobre%20Safe%20Socks"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600 transition-colors"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.571-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.205 5.077 4.372.711.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413-.074-.124-.272-.198-.57-.347z" />
-              </svg>
-              <span>Contactar por WhatsApp</span>
-            </a>
-          </div>
-        
       </section>
 
       {/* Footer */}
@@ -694,10 +694,10 @@ export default function SafeSocksLanding() {
             </div>
             <div className="text-center md:text-right">
               <p className="text-gray-400">
-                © 2024 Safe Socks. Todos los derechos reservados.
+                © 2025 Safe Socks. Todos los derechos reservados.
               </p>
               <p className="text-gray-400 text-sm mt-2">
-                Diseñado con ❤️ para tu seguridad y comodidad
+                Camina seguro con safesocks.
               </p>
             </div>
           </div>
